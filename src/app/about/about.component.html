@@ -1,0 +1,99 @@
+<h1>about works!</h1>
+<div class="container">
+    <div class="alert alert-light">
+        See notes below when building an Angular and Express<br><br>
+        <a href="#url">URL Navigation and Routers</a><br>
+        <a href="#proxy">Proxy the API calls to Express during Angular front-end development</a><br>
+        <a href="#api-call">API Calls in Angular services</a><br>
+        <a href="#api">Catch API calls in Express server</a><br>
+        <a href="#subscribe">Subscribe to the Response in Angular Components</a><br>
+        <a href="#submit">Submit Angular POST and GET Requests to Express</a>
+    </div>
+    <div class="container">
+        <a name="url"></a>
+        <h2>URL Navigation and Routers</h2>
+        <div class="container">
+            <p>
+                Handle the route or URL path to distinguish whether URI is an Angular or Express routing<br>
+                <small>localhost:4200/#/home</small><br>
+                <small>localhost:3000/#/home</small><br>
+                <small>localhost:3000/api</small>
+            </p>
+            <p>See <code>providers</code> in <code>app.module.ts</code></p>
+        </div>
+
+        <a name="proxy"></a>
+        <h2>Proxy the API calls to Express during Angular front-end development</h2>
+        <div class="container">
+            <p>
+                You need 2 running server during development build. (Angular and Express)<br>
+                And at this point they are not yet merged, you need to redirect API calls to <code>localhost:3000</code> for the Express server<br>
+            </p>
+            <p>Do the following:</p>
+            CREATE <code>proxy.conf.json</code><br>
+            MODIFY <code>package.json</code><br><br>
+            <img src="assets/proxy.conf.json.png" alt=""><br><br>
+<!-- <pre>
+&#123;
+    "/api": 	&#123;
+        "target": "http://localhost:3000",
+        "secure": false,
+        "logLevel": "debug"
+        &#125;
+&#125;
+</pre> -->
+            <strong>package.json</strong><br>
+            <code>
+                "start": "ng serve --proxy-config proxy.conf.json",<br>
+                "build": "ng build --prod --output-hashing none",<br>
+            </code>
+            <br>
+        </div>
+        <a name="api-call"></a>
+        <h2>API Calls in Angular services</h2>
+        <div class="container">
+            <p>
+                Import <code>HttpClientModule</code> in <code>app.module.ts</code><br>
+                Inject <code>HttpClient</code> in Angular services
+            </p>
+            <p>In relation to the <code>/api</code> above, please see the following<br>
+                <code>src/app/fibonacci/fibonacci.service.ts</code><br>
+                <code>src/app/sample/sample.service.ts</code>
+            </p>
+        </div>
+        <a name="api"></a>
+        <h2>Catch API calls in Express server</h2>
+        <div class="container">
+            <p>In relation to the <code>/api</code> above, please see the following<br>
+                <code>server/app.js</code><br>
+                <code>server/routes.api.js</code>
+            </p>
+        </div>
+        <a name="subscribe"></a>
+        <h2>Subscribe to the Response in Angular Components</h2>
+        <div class="container">
+            <p>To output the response from the server, Angular needs to subscribe on the services calling it.</p>
+            <p>See the following<br>
+                <code>src/app/fibonacci/fibonacci.component.ts</code><br>
+                <code>src/app/sample/sample.component.ts</code>
+            </p>
+        </div>
+        <a name="submit"></a>
+        <h2>Submit Angular POST and GET Requests to Express</h2>
+        <div class="container">
+            <p>
+                In Angular, see the following<br>
+                <code>src/app/fibonacci/fibonacci.component.ts</code><br>
+                <code>src/app/fibonacci/fibonacci.service.ts</code>
+            </p>
+            <p>
+                In Express, see the following<br>
+                <code>server/app.js</code>
+                <code>server/routes/api.js</code>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+<br><br><br><br><br><br><br><br><br>

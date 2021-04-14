@@ -1,0 +1,102 @@
+<h1>fibonacci works!</h1>
+<div class="alert alert-warning" role="alert">
+    Information about fibonacci below is from an <a href="/api/fibonacci" class="alert-link" target="_blank">API</a> from Express
+</div>
+
+<br>
+
+<div class="media">
+    <img [src]="data?.img" class="mr-3" width="15%">
+    <div class="media-body">
+      <h5 class="mt-0">{{ data?.full_name }}</h5>
+      <small>{{ data?.occupation }}</small>
+      <p><strong>Born</strong>: {{ data?.born }}</p>
+      <p>{{ data?.description }}</p>
+
+      <br>
+
+    <div class="alert alert-light" role="alert">
+        Try submitting some forms below for <strong>fibonacci</strong> sequence calculation
+    </div>      
+
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+            <h3>Fibonacci Sequence <small>(calculator)</small></h3>
+            <!-- fibonacciForm -->
+            <form [formGroup]="fibonacciForm">
+
+                <!-- Alert -->
+                <div class="alert alert-danger" role="alert" *ngIf="fibonacciForm.invalid && fibonacciForm.dirty">
+                    Please fix the errors below
+                </div>
+
+                <!-- X field -->
+                <div class="form-group">
+                  <label for="x">Number (x)</label>
+                  <input formControlName="x" type="text" class="form-control form-control-sm" id="x" aria-describedby="x" [class.is-invalid]="x.errors && fibonacciForm.dirty" [class.is-valid]="!x.errors">
+                  <small id="x" class="form-text text-muted">Pick an small number except 0</small>
+                  <div id="x" class="invalid-feedback" *ngIf="fibonacciForm.dirty">
+                    <span *ngIf="x.errors?.required">This is required</span>
+                    <span *ngIf="x.errors?.pattern">Please enter a number</span>
+                  </div>
+                </div>
+
+                <!-- Y field -->
+                <div class="form-group">
+                  <label for="y">Number (y)</label>
+                  <input formControlName="y" type="text" class="form-control form-control-sm" id="y" aria-describedby="y" [class.is-invalid]="y.errors && fibonacciForm.dirty" [class.is-valid]="!y.errors">
+                  <div id="y" class="invalid-feedback" *ngIf="fibonacciForm.dirty">
+                    <span *ngIf="y.errors?.required">This is required</span>
+                    <span *ngIf="y.errors?.pattern">Please enter a number</span>
+                  </div>
+                </div>
+
+                <!-- Radio field -->
+                <div *ngIf="fibonacciForm.valid">
+                    <small>Pick a submit method</small>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" formControlName="submitMethod" id="exampleRadios1" value="POST">
+                        <label class="form-check-label" for="exampleRadios1">
+                          POST
+                        </label>
+                      </div>
+                      <div class="form-check">
+                        <input class="form-check-input" type="radio" formControlName="submitMethod" id="exampleRadios2" value="GET">
+                        <label class="form-check-label" for="exampleRadios2">
+                          GET
+                        </label>
+                    </div>
+                    <br>
+                    <pre *ngIf="submitMethod.value == 'GET'">/calculate?x={{ x.value }}&&y={{ y.value }}</pre>
+                </div>
+
+                <button (click)="fibonacciFormSubmit()" [disabled]="submitted || fibonacciForm.invalid" type="button" class="btn" [class.btn-primary]="fibonacciForm.valid" [class.btn-secondary]="fibonacciForm.invalid">Submit</button>
+            </form>
+            <br><br>
+          </div>
+          <div class="col-sm">
+              <p>Values to be submitted:</p>
+            <pre>{{ fibonacciForm.value | json }}</pre>
+          </div>
+        </div>
+      </div>
+
+    </div>
+</div>
+
+
+<router-outlet></router-outlet>
+
+<hr>
+
+<!-- DOG API -->
+<h3>Dog API</h3>
+<p><small>(third party)</small></p>
+<p><button class="btn btn-success" (click)="getDogs()">Refresh List</button></p>
+
+<br><br>
+
+<img *ngFor="let dog of dogs" [src]="dog" style="max-width:20%">
+
+<br><br><br><br><br><br><br><br><br><br><br><br>
