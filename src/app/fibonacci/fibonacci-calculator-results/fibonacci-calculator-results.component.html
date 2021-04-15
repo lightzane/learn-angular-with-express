@@ -2,6 +2,6 @@
 <pre>{{ POSTsequence | json }}</pre>
 <pre>{{ GETsequence | json }}</pre>
 
-<ul>
+<ul *ngIf="GETsequence">
     <li *ngFor="let sequence of GETsequence.sequence">{{ sequence }}</li>
 </ul>
